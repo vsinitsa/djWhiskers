@@ -58,16 +58,6 @@ bot.on("message", async message => {
         console.log(queue);
     }
 
-    if(command === "help"){
-        let embed = new Discord.RichEmbed()
-            .setColor("#13108D")
-            .addField("/help", "help command")
-            .addField("/join", "asks the bot to join the server")
-            .addField("/play {link} or {search}", "plays link or first result of search");
-
-        message.channel.send({embed: embed});
-    }
-
    if(!command.startsWith(prefix)) return;
 
    let cmd = bot.commands.get(command.slice(prefix.length));
