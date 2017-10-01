@@ -30,5 +30,7 @@ var playSong = async (song, message, bot, queue, conf) =>{
 }
 
 module.exports.help = {
-    name: "play"
+    name: "play",
+    desc: "Plays provided link or first result of search query.",
+    usage: "/play {link} or /play {search queary}"
 }

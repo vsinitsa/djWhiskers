@@ -2,5 +2,6 @@
     "token": "your discord bot token goes here",
     "twitchtoken": "your twitch api token goes here",
     "youtubetoken": "your youtube api token goes here",
-    "prefix": "/"
+    "prefix": "/",
+    "owner": "id number of the owner of the bot",
 }

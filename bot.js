@@ -55,7 +55,7 @@ bot.on("message", async message => {
    let args = msgArray.slice(1);
 
     if(command === "testq"){
-        console.log(queue);
+        console.log(playerConfig["volume"]);
     }
 
    if(!command.startsWith(prefix)) return;

@@ -11,5 +11,7 @@ module.exports.run = async (bot, message, args, queue, conf) => {
 }
 
 module.exports.help = {
-    name: "join"
+    name: "join",
+    desc: "Bot joines the voice channel that you are in.",
+    usage: "/join"
 }
