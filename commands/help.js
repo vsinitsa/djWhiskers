@@ -1,5 +1,5 @@
 const Discord = module.require("discord.js");
-const randColor = module.require("../helpers/randColor.js");
+const randColor = module.require("../helpers/randcolor.js");
 
 module.exports.run = async (bot, message, args, queue, conf) => {
     let embed = new Discord.RichEmbed()
