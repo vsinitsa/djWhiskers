@@ -34,17 +34,38 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("ready", async() => {
     console.log(`Bot is ready! ${bot.user.username}`);
-    // try{
-    //     bot.guilds.forEach(async guild => {
-    //         let connection = guild.members.find(member => member.id === "109835713062662144").voiceChannel;
-    //         if(connection){
-    //             await connection.join();
-    //             queue[connection.guild.id] = [];
-    //         }
-    //     });
-    // }catch(e){
-    //     console.log(e.stack);
-    // }
+    try{
+        bot.guilds.forEach(async guild => {
+            let connection = guild.members.find(member => member.id === config.owner).voiceChannel;
+            if(connection){
+                await connection.join();
+                queue[connection.guild.id] = [];
+            }
+        });
+    }catch(e){
+        console.log(e.stack);
+    }
+
+    //disconnects the bot if there isnt anybody else in the room for 10 minutes
+    bot.setInterval(() => {
+        let hasHuman = false;
+        bot.voiceConnections.forEach(server => {
+           if(server.channel.members.size == 1){
+               server.disconnect();
+           }else{
+               server.channel.members.forEach(member => {
+                  if(!member.user.bot){
+                      hasHuman = true;
+                  }
+               });
+               if(!hasHuman){
+                   server.disconnect();
+               }
+           }
+        });
+    }, 600000);
+
+
 });
 
 bot.on("message", async message => {

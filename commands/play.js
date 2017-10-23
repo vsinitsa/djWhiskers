@@ -1,6 +1,7 @@
 const Discord = module.require("discord.js");
 const ytdl = module.require("ytdl-core");
 const ytSearch = module.require("youtube-search");
+const randColor = module.require("../helpers/randcolor.js");
 
 module.exports.run = async (bot, message, args, queue, conf) => {
     if(!args[0].includes("youtube")){
@@ -21,6 +22,14 @@ var playSong = async (song, message, bot, queue, conf) =>{
         queue[id].push(song);
     }else{
         const dispatcher = connection.playStream(ytdl(song, {filter: 'audioonly'}), {volume: conf["volume"]});
+        ytdl(song, (err, info) => {
+            let embed = new Discord.RichEmbed()
+            .setColor(randColor.randColor())
+            .setTitle("NOW PLAYING:")
+            .addField(info.title, song);
+
+            message.channel.send({embed: embed});
+        });
         dispatcher.on("end", () => {
            if(queue[id].length > 0){
                playSong(queue[id].shift(), message, bot, queue, conf);
